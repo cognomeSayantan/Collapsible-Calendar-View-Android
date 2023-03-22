@@ -28,7 +28,24 @@
             android:id="@+id/img_event_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/dot_icon"
+            app:srcCompat="@drawable/ic_dot"
+            android:visibility="gone"
+            android:padding="1dp"/>
+
+        <ImageView
+            android:id="@+id/img_event_tag2"
+            android:layout_width="wrap_content"
+            android:padding="1dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_dot"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/img_event_tag3"
+            android:padding="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_dot"
             android:visibility="gone" />
 
     </LinearLayout>

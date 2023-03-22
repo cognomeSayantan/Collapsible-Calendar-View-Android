@@ -108,6 +108,8 @@ class CalendarAdapter(context: Context, cal: Calendar) {
             val view = mInflater.inflate(R.layout.day_layout, null)
             val txtDay = view.findViewById<View>(R.id.txt_day) as TextView
             val imgEventTag = view.findViewById<View>(R.id.img_event_tag) as ImageView
+            val imgEventTag2 = view.findViewById<View>(R.id.img_event_tag2) as ImageView
+            val imgEventTag3 = view.findViewById<View>(R.id.img_event_tag3) as ImageView
 
             txtDay.text = day.day.toString()
             if (day.month != calendar.get(Calendar.MONTH)) {
@@ -117,10 +119,17 @@ class CalendarAdapter(context: Context, cal: Calendar) {
             for (j in mEventList.indices) {
                 val event = mEventList[j]
                 if (day.year == event.year
-                        && day.month == event.month
-                        && day.day == event.day) {
+                    && day.month == event.month
+                    && day.day == event.day
+                ) {
                     imgEventTag.visibility = View.VISIBLE
                     imgEventTag.setColorFilter(event.color, PorterDuff.Mode.SRC_ATOP)
+                    if (mEventList.size == 2) {
+                        imgEventTag2.visibility = View.VISIBLE
+                    }
+                    if (mEventList.size >= 3) {
+                        imgEventTag3.visibility = View.VISIBLE
+                    }
                 }
             }
 
