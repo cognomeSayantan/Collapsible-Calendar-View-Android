@@ -61,17 +61,41 @@ class MainActivity : AppCompatActivity() {
         });
         //To hide or show expand icon
         collapsibleCalendar.setExpandIconVisible(true)
+
         val today = GregorianCalendar()
-//        collapsibleCalendar.addEventTag(
-//            today.get(Calendar.YEAR),
-//            today.get(Calendar.MONTH),
-//            today.get(Calendar.DAY_OF_MONTH)
-//        )
-        today.add(Calendar.DATE, 4)
         collapsibleCalendar.selectedDay = Day(
+            today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH)
+        )
+        collapsibleCalendar.addEventTag(
+            today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH)
+        )
+        today.add(Calendar.DATE, 4)
+
+        collapsibleCalendar.addEventTag(
             today.get(Calendar.YEAR),
             today.get(Calendar.MONTH),
-            today.get(Calendar.DAY_OF_MONTH)
+            today.get(Calendar.DAY_OF_MONTH),
+            Color.BLUE
+        )
+        collapsibleCalendar.addEventTag(
+            today.get(Calendar.YEAR),
+            today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH),
+            Color.BLUE
+        )
+        today.add(Calendar.DATE, 5)
+        collapsibleCalendar.addEventTag(
+            today.get(Calendar.YEAR),
+            today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH),
+            Color.BLUE
+        )
+
+        collapsibleCalendar.addEventTag(
+            today.get(Calendar.YEAR),
+            today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH),
+            Color.BLUE
         )
         collapsibleCalendar.addEventTag(
             today.get(Calendar.YEAR),

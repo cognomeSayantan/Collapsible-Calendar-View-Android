@@ -2,6 +2,7 @@ package com.shrikanthravi.collapsiblecalendarview.data
 
 import android.content.Context
 import android.graphics.PorterDuff
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -115,20 +116,27 @@ class CalendarAdapter(context: Context, cal: Calendar) {
             if (day.month != calendar.get(Calendar.MONTH)) {
                 txtDay.alpha = 0.3f
             }
-
+            var counter = 0
             for (j in mEventList.indices) {
+                Log.d("CalendarAdapter", "refresh: $j")
                 val event = mEventList[j]
                 if (day.year == event.year
                     && day.month == event.month
                     && day.day == event.day
                 ) {
-                    imgEventTag.visibility = View.VISIBLE
-                    imgEventTag.setColorFilter(event.color, PorterDuff.Mode.SRC_ATOP)
-                    if (mEventList.size == 2) {
-                        imgEventTag2.visibility = View.VISIBLE
+                    counter++
+                    Log.d("CalendarAdapter", "refresh: ${day.day} ${day.month} ${day.year}")
+                    if (counter == 1) {
+                        imgEventTag.visibility = View.VISIBLE
+                        imgEventTag.setColorFilter(event.color, PorterDuff.Mode.SRC_ATOP)
                     }
-                    if (mEventList.size >= 3) {
+                    if (counter == 2) {
+                        imgEventTag2.visibility = View.VISIBLE
+                        imgEventTag.setColorFilter(event.color, PorterDuff.Mode.SRC_ATOP)
+                    }
+                    if (counter >= 3) {
                         imgEventTag3.visibility = View.VISIBLE
+                        imgEventTag.setColorFilter(event.color, PorterDuff.Mode.SRC_ATOP)
                     }
                 }
             }
