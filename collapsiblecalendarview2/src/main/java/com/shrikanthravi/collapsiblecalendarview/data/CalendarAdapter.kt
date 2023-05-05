@@ -118,14 +118,12 @@ class CalendarAdapter(context: Context, cal: Calendar) {
             }
             var counter = 0
             for (j in mEventList.indices) {
-                Log.d("CalendarAdapter", "refresh: $j")
                 val event = mEventList[j]
                 if (day.year == event.year
                     && day.month == event.month
                     && day.day == event.day
                 ) {
                     counter++
-                    Log.d("CalendarAdapter", "refresh: ${day.day} ${day.month} ${day.year}")
                     if (counter == 1) {
                         imgEventTag.visibility = View.VISIBLE
                         imgEventTag.setColorFilter(event.color, PorterDuff.Mode.SRC_ATOP)
