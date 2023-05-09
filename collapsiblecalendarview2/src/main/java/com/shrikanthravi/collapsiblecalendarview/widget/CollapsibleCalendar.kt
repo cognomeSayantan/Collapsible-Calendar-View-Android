@@ -38,7 +38,11 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         val today = GregorianCalendar()
         this.selectedItem = null
         this.selectedItemPosition = -1
-        this.selectedDay = Day(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH))
+        this.selectedDay = Day(
+            today.get(Calendar.YEAR),
+            today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH)
+        )
         mCurrentWeekIndex = suitableRowIndex
         setAdapter(calenderAdapter)
     }
@@ -101,14 +105,16 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
                 val month = cal.get(Calendar.MONTH)
                 val year = cal.get(Calendar.YEAR)
                 return Day(
-                        year,
-                        month + 1,
-                        day)
+                    year,
+                    month + 1,
+                    day
+                )
             }
             return Day(
-                    selectedItem!!.year,
-                    selectedItem!!.month,
-                    selectedItem!!.day)
+                selectedItem!!.year,
+                selectedItem!!.month,
+                selectedItem!!.day
+            )
         }
         set(value: Day?) {
             field = value
@@ -166,7 +172,11 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         init(context)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         init(context)
     }
 
@@ -273,16 +283,18 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
             var rowCurrent: TableRow
             rowCurrent = TableRow(context)
             rowCurrent.layoutParams = TableLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT)
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
             for (i in 0..6) {
                 val view = mInflater.inflate(R.layout.layout_day_of_week, null)
                 val txtDayOfWeek = view.findViewById<View>(R.id.txt_day_of_week) as TextView
                 txtDayOfWeek.setText(DateFormatSymbols().getShortWeekdays()[(i + firstDayOfWeek) % 7 + 1])
                 view.layoutParams = TableRow.LayoutParams(
-                        0,
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        1f)
+                    0,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
                 rowCurrent.addView(view)
             }
             mTableHead.addView(rowCurrent)
@@ -293,17 +305,22 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
                 if (i % 7 == 0) {
                     rowCurrent = TableRow(context)
                     rowCurrent.layoutParams = TableLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT)
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
                     mTableBody.addView(rowCurrent)
                 }
                 val view = mAdapter.getView(i)
                 view.layoutParams = TableRow.LayoutParams(
-                        0,
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        1f)
+                    0,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
                 params.let { params ->
-                    if (params != null && (mAdapter.getItem(i).diff < params.prevDays || mAdapter.getItem(i).diff > params.nextDaysBlocked)) {
+                    if (params != null && (mAdapter.getItem(i).diff < params.prevDays || mAdapter.getItem(
+                            i
+                        ).diff > params.nextDaysBlocked)
+                    ) {
                         view.isClickable = false
                         view.alpha = 0.3f
                     } else {
@@ -364,6 +381,11 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         reload()
     }
 
+    fun clearCalender() {
+        mAdapter?.clearCalendar()
+        reload()
+    }
+
     fun addEventTag(numYear: Int, numMonth: Int, numDay: Int, color: Int) {
         mAdapter!!.addEvent(Event(numYear, numMonth, numDay, color))
 
@@ -374,7 +396,12 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
     fun prevMonth() {
         val cal = mAdapter!!.calendar
         params.let {
-            if (it != null && (Calendar.getInstance().get(Calendar.YEAR) * 12 + Calendar.getInstance().get(Calendar.MONTH) + it.prevDays / 30) > (cal.get(Calendar.YEAR) * 12 + cal.get(Calendar.MONTH))) {
+            if (it != null && (Calendar.getInstance()
+                    .get(Calendar.YEAR) * 12 + Calendar.getInstance()
+                    .get(Calendar.MONTH) + it.prevDays / 30) > (cal.get(Calendar.YEAR) * 12 + cal.get(
+                    Calendar.MONTH
+                ))
+            ) {
                 val myAnim = AnimationUtils.loadAnimation(context, R.anim.bounce)
                 val interpolator = BounceAnimator(0.1, 10.0)
                 myAnim.setInterpolator(interpolator)
@@ -398,7 +425,12 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
     fun nextMonth() {
         val cal = mAdapter!!.calendar
         params.let {
-            if (it != null && (Calendar.getInstance().get(Calendar.YEAR) * 12 + Calendar.getInstance().get(Calendar.MONTH) + it.nextDaysBlocked / 30) < (cal.get(Calendar.YEAR) * 12 + cal.get(Calendar.MONTH))) {
+            if (it != null && (Calendar.getInstance()
+                    .get(Calendar.YEAR) * 12 + Calendar.getInstance()
+                    .get(Calendar.MONTH) + it.nextDaysBlocked / 30) < (cal.get(Calendar.YEAR) * 12 + cal.get(
+                    Calendar.MONTH
+                ))
+            ) {
                 val myAnim = AnimationUtils.loadAnimation(context, R.anim.bounce)
                 val interpolator = BounceAnimator(0.1, 10.0)
                 myAnim.setInterpolator(interpolator)
